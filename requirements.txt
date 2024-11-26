@@ -1,0 +1,9 @@
+fastapi 
+uvicorn 
+sqlalchemy 
+mysqlclient 
+pydantic 
+email-validator
+python-dotenv
+mysql-connector-python
+jinja2
