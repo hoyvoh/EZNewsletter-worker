@@ -3,7 +3,7 @@ from models import connect, SubscriptionModel, PostModel
 from emails.emails import send_welcome_email, send_newsletter
 from celery.result import AsyncResult
 from app import celery
-import asyncio
+from datetime import datetime
 from pydantic import BaseModel
 from typing import List, Optional
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,6 +40,7 @@ class PostCreateRequest(BaseModel):
     shares_count: Optional[int] = 0
     comments_count: Optional[int] = 0
     first_image: str
+    created_at: Optional[datetime] = None
 
     class Config:
         orm_mode = True
@@ -88,6 +89,7 @@ async def check_task_status(task_id: str):
 @app.post("/posts/")
 async def create_post(post: PostCreateRequest):
     try:
+        post.created_at = datetime.now()
         post_model.create_post(post_data=post)
         return {"message": "Post and images added successfully!"}
     except Exception as e:
