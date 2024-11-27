@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS ezgroup;
+CREATE USER IF NOT EXISTS 'ezgroup'@'%' IDENTIFIED BY 'ezgroup@admin';
+GRANT ALL PRIVILEGES ON ezgroup.* TO 'ezgroup'@'%';
+FLUSH PRIVILEGES;

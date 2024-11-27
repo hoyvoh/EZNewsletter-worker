@@ -97,8 +97,14 @@
         <!-- Header Logo -->
         <div class="header-logo">
           <img
-            src="https://th.bing.com/th/id/R.aa99f1592665d18355f29c5297ee5c15?rik=r9ee0UsfPSieqA&riu=http%3a%2f%2fhenriquezlara.com%2fblog%2fwp-content%2fuploads%2f2011%2f02%2fHL_Web_EzLife_Id_1.jpg&ehk=jkRcyZpzbySpL39B767NjaXwHb2qaKy53i%2f5a%2b7%2f17c%3d&risl=&pid=ImgRaw&r=0"
+            src="https://ezgroup-static-files-bucket.s3.ap-southeast-2.amazonaws.com/media/ezgroup-logo.jpg"
             alt="logo"
+            style="
+              max-width: 45px;
+              width: 100%;
+              height: auto;
+              border-radius: 20;
+            "
           />
         </div>
 
@@ -116,7 +122,7 @@
         <div class="news-grid">
           {% for post in posts %}
           <div class="news-card">
-            <img src="{{ post.first_image[0].image_url }}" alt="News Image" />
+            <img src="{{ post.first_image }}" alt="News Image" />
             <h2>{{ post.title }}</h2>
             \
             <p>{{ post.content[:100] }}...</p>
