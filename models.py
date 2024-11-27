@@ -74,7 +74,8 @@ class PostModel:
             likes_count INT DEFAULT 0,          
             shares_count INT DEFAULT 0,         
             comments_count INT DEFAULT 0,       
-            first_image VARCHAR(255) NOT NULL   
+            first_image VARCHAR(255) NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP 
         );
         """
         cursor = self.connection.cursor()
@@ -88,9 +89,9 @@ class PostModel:
             post_query = """
                 INSERT INTO posts (
                     id, title, content, category, user_id, user_name, user_email, 
-                    likes_count, shares_count, comments_count, first_image
+                    likes_count, shares_count, comments_count, first_image, created_at
                 ) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             post_data_tuple = (
                 post_data.id if post_data.id else str(uuid.uuid4()), 
@@ -103,7 +104,8 @@ class PostModel:
                 post_data.likes_count or 0, 
                 post_data.shares_count or 0, 
                 post_data.comments_count or 0, 
-                post_data.first_image 
+                post_data.first_image,
+                post_data.created_at
             )
 
             print("Post data tuple:", post_data_tuple)
@@ -122,7 +124,12 @@ class PostModel:
         try:
             cursor = self.connection.cursor()
 
-            query = "SELECT * FROM posts"
+            query = """
+                SELECT id, title, content, category, user_id, user_name, user_email, 
+                    likes_count, shares_count, comments_count, first_image
+                FROM posts
+                ORDER BY created_at DESC
+            """
             cursor.execute(query)
 
             posts = cursor.fetchall()
