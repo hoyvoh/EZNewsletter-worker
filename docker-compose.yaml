@@ -27,7 +27,7 @@ services:
   newsletter:
     build: .
     ports:
-      - 8004:8000
+      - 8000:8000
     command: uvicorn main:app --host 0.0.0.0 --reload
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
