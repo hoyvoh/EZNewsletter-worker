@@ -7,3 +7,9 @@ email-validator
 python-dotenv
 mysql-connector-python
 jinja2
+celery
+mysqlclient
+django
+redis
+requests
+flower
