@@ -75,7 +75,7 @@ class PostModel:
             shares_count INT DEFAULT 0,         
             comments_count INT DEFAULT 0,       
             first_image VARCHAR(255) NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP 
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
         """
         cursor = self.connection.cursor()
