@@ -25,8 +25,6 @@ celery.conf.beat_schedule = {
     },
 }
 
-
-
 @celery.task
 def test_celery():
     return "Test Celery Task Executed Successfully"

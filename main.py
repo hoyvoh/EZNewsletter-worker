@@ -1,16 +1,51 @@
 from fastapi import FastAPI, HTTPException
-from models import connect, SubscriptionModel
+from models import connect, SubscriptionModel, PostModel
 from emails.emails import send_welcome_email, send_newsletter
 from celery.result import AsyncResult
 from app import celery
 import asyncio
+from pydantic import BaseModel
+from typing import List, Optional
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "http://52.65.28.64:8080",
+    "http://52.65.190.185:8000",
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,   
+    allow_credentials=True,  
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
+
 connection = connect()
 subscription_model = SubscriptionModel(connection)
+post_model = PostModel(connection)
+
+class PostCreateRequest(BaseModel):
+    id: int
+    title: str
+    content: str
+    category: str
+    user_id: str
+    user_name: str
+    user_email: str
+    likes_count: Optional[int] = 0
+    shares_count: Optional[int] = 0
+    comments_count: Optional[int] = 0
+    first_image: str
+
+    class Config:
+        orm_mode = True
 
 subscription_model.create_table()
+post_model.create_table()
 
 @app.get("/subscribers")
 def get_subscribers():
@@ -22,7 +57,7 @@ def get_subscribers():
 @app.post("/subscribers")
 async def create_subscriber(sub_email: str):
     try:
-        send_welcome_email.apply_async(args=[sub_email])
+        send_welcome_email(sub_email)
         return subscription_model.add_subscription(sub_email)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -31,7 +66,7 @@ async def create_subscriber(sub_email: str):
 def send_newsletter_to_all():
     try:
         print("(0) Start sending newsletters to all...")
-        result = send_newsletter.apply_async()
+        result = send_newsletter(connection)
         return {"message": "Newsletter sent successfully to all subscribers"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
@@ -49,3 +84,20 @@ async def check_task_status(task_id: str):
             return {"status": result.state}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error checking task status: {str(e)}")
+
+@app.post("/posts/")
+async def create_post(post: PostCreateRequest):
+    try:
+        post_model.create_post(post_data=post)
+        return {"message": "Post and images added successfully!"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error while creating post: {e}")
+    
+@app.get("/posts/")
+async def get_posts():
+    try:
+        posts = post_model.get_all_posts() 
+        return {"posts": posts}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error while fetching posts: {e}")
