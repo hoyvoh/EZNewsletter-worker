@@ -11,9 +11,11 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://52.65.28.64:8080",
-    "http://52.65.190.185:8000",
-    "*",
+    # "http://52.65.28.64:8080",
+    # "http://52.65.190.185:8000",
+    # "*",
+    "http://172.31.0.24:8000", # BE private
+    "http://172.31.1.145:8080", # SSO private
 ]
 
 app.add_middleware(
