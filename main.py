@@ -13,7 +13,9 @@ app = FastAPI()
 origins = [
     "http://52.65.28.64:8080",
     "http://52.65.190.185:8000",
-    "*",
+    "https://sso.ezgroups.com.vn",
+    "https://blog.ezgroups.com.vn",
+    "https://ezgroups.com.vn",
 ]
 
 app.add_middleware(
