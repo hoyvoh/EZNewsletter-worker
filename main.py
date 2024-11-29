@@ -16,6 +16,9 @@ origins = [
     "https://sso.ezgroups.com.vn", # sso domain
     "https://blog.ezgroups.com.vn", # server domain
     "https://ezgroups.com.vn", # FE domain
+    "http://sso.ezgroups.com.vn", # sso domain
+    "http://blog.ezgroups.com.vn", # server domain
+    "http://ezgroups.com.vn", # FE domain
     "https://ezlife-real-estate-frontend.vercel.app", # FE vercel domain
 ]
 
