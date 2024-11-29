@@ -11,11 +11,12 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://52.65.28.64:8080",
-    "http://52.65.190.185:8000",
-    "https://sso.ezgroups.com.vn",
-    "https://blog.ezgroups.com.vn",
-    "https://ezgroups.com.vn",
+    "http://52.65.28.64:8080", # sso public
+    "http://52.65.190.185:8000", # server public
+    "https://sso.ezgroups.com.vn", # sso domain
+    "https://blog.ezgroups.com.vn", # server domain
+    "https://ezgroups.com.vn", # FE domain
+    "https://ezlife-real-estate-frontend.vercel.app", # FE vercel domain
 ]
 
 app.add_middleware(
