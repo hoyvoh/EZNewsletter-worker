@@ -41,7 +41,6 @@ services:
       - DB_PASSWORD=${MASTER_PASSWORD}
     depends_on:
       - redis
-      - mysql
     networks:
       - backend_network
 
@@ -60,7 +59,6 @@ services:
     depends_on:
       - newsletter
       - redis
-      - mysql
     networks:
       - backend_network
 
@@ -78,7 +76,6 @@ services:
       - DB_PASSWORD=${MASTER_PASSWORD}
     depends_on:
       - redis
-      - mysql
     networks:
       - backend_network
 
