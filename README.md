@@ -1,5 +1,5 @@
 # EZGROUP NEWSLETTER API
-See API document at: [newsletters](https://newsletters.ezgroups.com.vn)
+See API document at: [newsletters](https://newsletters.ezgroups.com.vn/docs/)
 See detailed development and deployment structure here: [presentation](https://www.canva.com/design/DAGXK_QCTkU/yNCPFA02dd0RLyQqiL2Jgw/edit?utm_content=DAGXK_QCTkU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 This API is a scheduled task distribution module, dedicated to send emails periodically to subscriber based on newest posts and notifications from the blog module.
