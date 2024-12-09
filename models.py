@@ -6,11 +6,11 @@ import uuid
 
 load_dotenv()
 
-MYSQL_DBNAME = os.getenv("MYSQL_DBNAME", "default_dbname")
-MYSQL_USER = os.getenv("MYSQL_USER", "default_user")
-MYSQL_PASS = os.getenv("MYSQL_PASS", "default_pass")
-MYSQL_HOST = os.getenv("MYSQL_HOST", "127.0.0.1")
-MYSQL_PORT = os.getenv("MYSQL_PORT", "3306")
+MYSQL_DBNAME = os.getenv("RDS_NAME", "default_dbname")
+MYSQL_USER = os.getenv("MASTER_USERNAME", "default_user")
+MYSQL_PASS = os.getenv("MASTER_PASSWORD", "default_pass")
+MYSQL_HOST = os.getenv("RDS_HOST", "127.0.0.1")
+MYSQL_PORT = os.getenv("RDS_PORT", "3306")
 
 def connect():
     return mysql.connector.connect(
