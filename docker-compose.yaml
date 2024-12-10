@@ -1,30 +1,6 @@
 version: "3.8"
 
 services:
-  # mysql:
-  #   image: mysql:8.0
-  #   container_name: mysql_container
-  #   restart: unless-stopped
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: ${MYSQL_PASS}
-  #     MYSQL_DATABASE: ${MYSQL_DBNAME}
-  #     MYSQL_USER: ${MYSQL_USER}
-  #     MYSQL_PASSWORD: ${MYSQL_PASS}
-  #   volumes:
-  #     - mysql_data:/var/lib/mysql
-  #     - ./mysql-init:/docker-entrypoint-initdb.d
-  #     - ./init.sh:/docker-entrypoint-initdb.d/init.sh
-  #   networks:
-  #     - backend_network
-  #   ports:
-  #     - "3306:3306"
-  #   command:
-  #     [
-  #       "bash",
-  #       "-c",
-  #       "chmod -R 644 /docker-entrypoint-initdb.d/* && /usr/local/bin/docker-entrypoint.sh mysqld",
-  #     ]
-
   newsletter:
     build: .
     restart: unless-stopped
